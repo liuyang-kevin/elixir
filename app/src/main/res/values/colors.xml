@@ -3,4 +3,34 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--
+十六进制透明度参照表:
+00%=FF（不透明）    5%=F2    10%=E5    15%=D8    20%=CC    25%=BF    30%=B3    35%=A5    40%=99    45%=8c    50%=7F
+55%=72    60%=66    65%=59    70%=4c    75%=3F    80%=33    85%=21    90%=19    95%=0c    100%=00（全透明）
+-->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="c1101">#de212121</color>
+    <color name="c1102">#8a757575</color>
+    <color name="c1103">#42bdbdbd</color>
+    <color name="c1104">#1fe0e0e0</color>
+
+    <color name="c1001">#e83b3b</color>
+    <color name="c1002">#30be41</color>
+
+
+    <!--黑色透明度 例如：blackT70  就是70%的透明度-->
+    <color name="blackT10">#E5000000</color>
+    <color name="blackT20">#CC000000</color>
+    <color name="blackT30">#b3000000</color>
+    <color name="blackT40">#99000000</color>
+    <color name="blackT50">#7F000000</color>
+    <color name="blackT60">#66000000</color>
+    <color name="blackT70">#4c000000</color>
+    <color name="blackT80">#33000000</color>
+    <color name="blackT90">#19000000</color>
+
+
 </resources>
