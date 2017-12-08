@@ -16,7 +16,14 @@ android {
         }
     }
     buildTypes {
+        debug {
+            // buildConfig Class
+            // http://106.75.50.97:8844
+            buildConfigField "String", "BASE_URL", "\"https://192.168.10.32:8844\""
+        }
+
         release {
+            buildConfigField "String", "BASE_URL", "\"http://106.75.87.149:8080\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -36,4 +43,18 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     implementation project(path: ':multiprocesselixir')
+
+
+    // ***retrofit2 start***
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+//
+////    //    rx
+////    implementation 'io.reactivex:rxandroid:2.1.0'
+////    implementation 'io.reactivex:rxjava:2.1.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1' //这个版本需要跟OKHttp版本号 一致； 上头的这个封装 用的3.3.0;
 }

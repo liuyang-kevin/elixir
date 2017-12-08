@@ -27,7 +27,7 @@ public class BaseActivity extends Activity implements ServiceConnection {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bindService(new Intent(BaseActivity.this, ElixirService.class), this, BIND_AUTO_CREATE);
+//        bindService(new Intent(BaseActivity.this, ElixirService.class), this, BIND_AUTO_CREATE);
 
     }
 
