@@ -1,6 +1,8 @@
 package com.echoesnet.crowdfunding.net;
 
 
+import com.echoesnet.crowdfunding.ElixirApplication;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
@@ -27,11 +29,14 @@ public final class HttpsTrustManager {
 
     public HttpsTrustManager() {
         try {
-            trustManager = trustManagerForCertificates(trustedCertificatesInputStream());
+            trustManager = trustManagerForCertificates(
+                    ElixirApplication.getInstance().getAssets().open("file.crt")
+            );
+//            trustManager = trustManagerForCertificates(trustedCertificatesInputStream());
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, new TrustManager[]{trustManager}, null);
             sslSocketFactory = sslContext.getSocketFactory();
-        } catch (GeneralSecurityException e) {
+        } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -94,7 +99,8 @@ public final class HttpsTrustManager {
         }
 
         // Put the certificates a key store.
-        char[] password = "password".toCharArray(); // Any password will work.
+//        char[] password = "password".toCharArray(); // Any password will work.
+        char[] password = "123456".toCharArray(); // Any password will work.
         KeyStore keyStore = newEmptyKeyStore(password);
         int index = 0;
         for (Certificate certificate : certificates) {

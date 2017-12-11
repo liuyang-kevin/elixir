@@ -1,6 +1,5 @@
 package com.echoesnet.crowdfunding.net;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.echoesnet.crowdfunding.BuildConfig;
@@ -10,12 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -53,7 +54,12 @@ public class HttpMethods {
 //        });
 
         builder.sslSocketFactory(trustManager.sslSocketFactory,trustManager.trustManager);
-//        builder.hostnameVerifier((s, sslSession) -> true);
+        builder.hostnameVerifier(new HostnameVerifier() {
+            @Override
+            public boolean verify(String hostname, SSLSession session) {
+                return true;
+            }
+        });
 
 
 
