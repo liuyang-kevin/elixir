@@ -29,14 +29,15 @@ public final class HttpsTrustManager {
 
     public HttpsTrustManager() {
         try {
-            trustManager = trustManagerForCertificates(
-                    ElixirApplication.getInstance().getAssets().open("file.crt")
-            );
-//            trustManager = trustManagerForCertificates(trustedCertificatesInputStream());
+//            trustManager = trustManagerForCertificates(
+////                    ElixirApplication.getInstance().getAssets().open("file.crt")
+//                    ElixirApplication.getInstance().getAssets().open("cChat.crt")
+//            );
+            trustManager = trustManagerForCertificates(trustedCertificatesInputStream());
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, new TrustManager[]{trustManager}, null);
             sslSocketFactory = sslContext.getSocketFactory();
-        } catch (GeneralSecurityException | IOException e) {
+        } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
     }
@@ -47,23 +48,20 @@ public final class HttpsTrustManager {
      * file that gets bundled with the application.
      */
     private InputStream trustedCertificatesInputStream() {
-        String myCertificationAuthority = "" +
-                "-----BEGIN CERTIFICATE-----\n" +
-                "MIICuDCCAiGgAwIBAgIJAIs736cLbpTUMA0GCSqGSIb3DQEBBQUAMHUxCzAJBgNV\n" +
-                "BAYTAkNOMREwDwYDVQQIDAhTaGFuZ2hhaTERMA8GA1UEBwwIU2hhbmdoYWkxEjAQ\n" +
-                "BgNVBAoMCWNhcmR2YWx1ZTESMBAGA1UECwwJY2FyZHZhbHVlMRgwFgYDVQQDDA93\n" +
-                "d3cuY3ZiYW9saS5jb20wHhcNMTYxMTI5MDIyMzA2WhcNMTgxMTI5MDIyMzA2WjB1\n" +
-                "MQswCQYDVQQGEwJDTjERMA8GA1UECAwIU2hhbmdoYWkxETAPBgNVBAcMCFNoYW5n\n" +
-                "aGFpMRIwEAYDVQQKDAljYXJkdmFsdWUxEjAQBgNVBAsMCWNhcmR2YWx1ZTEYMBYG\n" +
-                "A1UEAwwPd3d3LmN2YmFvbGkuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKB\n" +
-                "gQDN3qqFHz4cBw47OJ2EuY+I+eG+FtPg+obapM9YunHzIslP/ySOyb1Zec6LvxUQ\n" +
-                "tJSbrM8FM1UEvWstDI6ZBZ6C62545oF0IS78PyvOBtJYRJY/x26LRUnlSDAoadJl\n" +
-                "xVzThRc6VPhHugNVQQSt9WTzdzisA6uU+6dc3RAZkGSbQQIDAQABo1AwTjAdBgNV\n" +
-                "HQ4EFgQUdESB48DPV3NnR4eQqt3gb008tzMwHwYDVR0jBBgwFoAUdESB48DPV3Nn\n" +
-                "R4eQqt3gb008tzMwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCZdkn3\n" +
-                "xxn0lE2SKHE29zaMvSwOuzaVophRRGBiPH+h1BTL+Cf0ujzHyx3NVngHHXPxNWX8\n" +
-                "ZgJRssytSVpdOY05Quw7G4CCyEg+6/RK/RBKluy6RcBkqedAqBbV2qw1wvRPDDGn\n" +
-                "1mIVq+RRJDHXNTTI3nRfI6o+BpOojaTEKxG4gQ==\n" +
+        String myCertificationAuthority = "-----BEGIN CERTIFICATE-----\n" +
+                "MIICxzCCAa+gAwIBAgIEOksB4jANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDEwlsb2NhbGhvc3Qw\n" +
+                "HhcNMTcxMjExMDUxNTI3WhcNMTgxMjExMDUxNTI3WjAUMRIwEAYDVQQDEwlsb2NhbGhvc3QwggEi\n" +
+                "MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCAqtDmZ2DDEEb3hSjonl0kAxoWO4TTHdetmAic\n" +
+                "DHm87/XW5gXHUjMxfaMl5XiyY+vBcfD05empsFQluk/Niv+4RCNOYcQES0DD8WmBQu2mluJUukVV\n" +
+                "NIDkJ2vfbitjtUNbsPCX6TUTSs323CIYoRQHqXmtap9ZDtbHuiwQ3uoFYMiTIYxknn85qlwHHW3W\n" +
+                "sC1GFUl+FDeYh7oWyYbfssCkYe4oJl0FDwfNJ9LR0NEoGZHYgXpldsP2dSpcgOipgZnm0IIbYHvf\n" +
+                "MCfqspsr92RwFOehs6dLYXkUXk1jW+x5KUG7gxaliwLsg3GG03wh17TghrZZ+dLqz7dPieuE2Y2/\n" +
+                "AgMBAAGjITAfMB0GA1UdDgQWBBRwbfBBWdVPb7lc2I4+c/EVaI/z4TANBgkqhkiG9w0BAQsFAAOC\n" +
+                "AQEACwGgUhE8OmzkiqNRUodzqr3w9i0xMWGH8tW4QoZmzARzfVkwamg8yqRdiTT2dvgSze/FLIj+\n" +
+                "+uYaMDBDN8FmXm2rxpG/D/rISqV3cV+jV5r9bfI8IaT/7hrWGPvW8srHemER5kdJtWTC09g+PaBz\n" +
+                "kThwBdpyxEVkiWXQUtR8UaISzqIQU9qHlJZQesDoDi+pYCcaiwcgIajUBoKQvNiZSnEdRk2HhoxN\n" +
+                "zpvYyBAWh7Y+bXxpmIv/IzjYE1XzwezDF89GOiq0I1/PdKDAta5TTmYWiAoMoH6vldHAG0klzv/n\n" +
+                "2EyDehy7ro5x2z0L5jpn3SwN+sdErcssm9riV/CflQ==\n" +
                 "-----END CERTIFICATE-----";
         return new Buffer()
                 .writeUtf8(myCertificationAuthority)
